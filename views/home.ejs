@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>DashBoard</title>
+  </head>
+  <body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://ci6.googleusercontent.com/proxy/3glEYq6w-e4hLVdAOQkl6jHMk-qVEej0MoEp61x5sIprqXH5zTiEgFOgSmKIjDdQZknKOfG_Pnei83BXEZBHFCaq1KirbUsC7e4TgCl4DO5WIqHaGaXazCvl4UOY_-QPiUJbPo9mdnZtpReqzJU0CRqpk46RueBvEZAR9e4vl7NKxwVIyMVcCQeK5mWZfVT2tNWMsfP37YKWcb2p8Q=s0-d-e1-ft#https://docs.google.com/uc?export=download&id=1-pC1Vq-ZdSIhR8J6MlyWQ0T2b7Mor7QA&revid=0B_8Nn38HIfB4ZkRzQk1aWlZjamJuL1RDenJZb2NGNEl5eXM0PQ" width="30" height="30" class="d-inline-block align-top" alt="">
+        CentreSource
+    </a>
+    </nav>
+    <div class="msgDiv"></div>
+    <div class="container-fluid">
+        <h1>Home page</h1>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="add-category">
+                    <form action="javascript:;" id="addCategory">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Add Category</label>
+                        <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="add category name">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info"> Submit </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="add-category">
+                    <form action="javascript:;" id="sub_category">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select Category</label>
+                        <select class="form-control" name="main_category" id="exampleFormControlSelect1">
+                        <% mainCategories.forEach(item=>{ %>
+                        <option><%= item.category_name %></option>
+                        <%})%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Add Sub Category</label>
+                        <input type="text" class="form-control" name="sub_category" id="exampleFormControlInput1" placeholder="add category name">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="add-category">
+                    <form action="javascript:;" id="addproduct">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select Category</label>
+                        <select class="form-control" name="maincategory" id="exampleFormControlSelect1">
+                        <% mainCategories.forEach(item=>{ %>
+                        <option><%= item.category_name %></option>
+                        <%})%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select Category</label>
+                        <select class="form-control" name="subcategory" id="exampleFormControlSelect1">
+                        <% subcategories.forEach(item=>{ %>
+                        <option><%= item.sub_category_name %></option>
+                        <%})%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Add product</label>
+                        <input type="text" class="form-control" name="product_name" id="exampleFormControlInput1" placeholder="add category name">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+        <div class="container">
+            <h3>Products</h3>
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">product Link</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(item=>{ %>
+                <tr>
+                <td><%= item.id %></td>
+                <td>www.example.com/<%= item.category_name %>/<%= item.sub_category_name %>/<%= item.product_name %></td>
+                </tr>
+                <%})%>
+            </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="container">
+            <h3>Categories</h3>
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">category name</th>
+                <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% mainCategories.forEach((item,index)=>{ ++index %>
+                <tr>
+                <td><%= index %></td>
+                <td><%= item.category_name %></td>
+                <td><button type="button" onclick="editCategory('<%= item.category_name %>')" class="btn btn-warning">Edit</button></td>
+                </tr>
+                <%})%>
+            </tbody>
+            </table>
+        </div>
+
+
+        <div class="container">
+            <h3>Sub Categories</h3>
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">category name</th>
+                <th scope="col">sub Category</th>
+                <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% subcategories.forEach((item,index)=>{ ++index%>
+                <tr>
+                <td><%= index %></td>
+                <td><%= item.category_name %></td>
+                <td><%= item.sub_category_name %></td>
+                <td><button type="button" onclick="editSubCategory('<%= item.category_name %>','<%= item.sub_category_name %>')" class="btn btn-warning">Edit</button></td>
+                </tr>
+                <%})%>
+            </tbody>
+            </table>
+        </div>
+
+
+    <div class="modal" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editCategory" action="javascript:;">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Old name</label>
+                        <input type="text" class="form-control" id="oldname" name="oldname" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">New name</label>
+                        <input type="text" class="form-control" name="newname">
+                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+            </div>
+            <div class="msgDiv2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editSubCategoryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Subcategory</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editSubCategory" action="javascript:;">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Category name</label>
+                        <input type="text" class="form-control" id="mainCatname" name="" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Old name</label>
+                        <input type="text" class="form-control" id="oldsubname" name="oldname" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">New name</label>
+                        <input type="text" class="form-control" name="newname">
+                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        $('form#addCategory').validate({
+            normalizer:function(value){
+                return $.trim(value)
+            },
+            rules:{
+                name:{
+                    required:true
+                },
+            },
+            submitHandler: function(form){
+                var data = $('#addCategory').serialize();
+                console.log(data)
+                $.ajax({
+                    url:'/add-category',
+                    data: data,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == true){
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv').html(
+                                `
+                                <div class="alert alert-success" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        } else {
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv').html(
+                                `
+                                <div class="alert alert-danger" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        }
+                    }
+                })
+            }
+        })
+
+        $('form#sub_category').validate({
+            normalizer:function(value){
+                return $.trim(value)
+            },
+            rules:{
+                main_category:{
+                    required:true
+                },
+                sub_category:{
+                    required:true
+                },
+            },
+            submitHandler: function(form){
+                var data = $('#sub_category').serialize();
+                console.log(data)
+                $.ajax({
+                    url:'/add-sub-category',
+                    data: data,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == true){
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv').html(
+                                `
+                                <div class="alert alert-success" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        } else {
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv').html(
+                                `
+                                <div class="alert alert-danger" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        }
+                    }
+                })
+            }
+        })
+
+        $('form#addproduct').validate({
+            normalizer:function(value){
+                return $.trim(value)
+            },
+            rules:{
+                maincategory:{
+                    required:true
+                },
+                subcategory:{
+                    required:true
+                },
+                product_name:{
+                    required:true
+                }
+            },
+            submitHandler: function(form){
+                var data = $('#addproduct').serialize();
+                console.log(data)
+                $.ajax({
+                    url:'/add-products',
+                    data: data,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == true){
+                            window.location.reload()
+                            }
+                    }
+                })
+            }
+        })
+
+
+        function editCategory(name){
+        $("#editModal").modal();
+        $('#oldname').val(name)
+        }
+
+        function editSubCategory(mainName,subName){
+        $("#editSubCategoryModal").modal();
+        $('#mainCatname').val(mainName)
+        $('#oldsubname').val(subName)
+        }
+
+
+        $('form#editCategory').validate({
+            normalizer:function(value){
+                return $.trim(value)
+            },
+            rules:{
+                newname:{
+                    required:true
+                },
+            },
+            submitHandler: function(form){
+                var data = $('#editCategory').serialize();
+                console.log(data)
+                $.ajax({
+                    url:'/edit-main',
+                    data: data,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == true){
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv2').html(
+                                `
+                                <div class="alert alert-success" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        } else {
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv2').html(
+                                `
+                                <div class="alert alert-danger" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        }
+                    }
+                })
+            }
+        })
+
+
+        $('form#editSubCategory').validate({
+            normalizer:function(value){
+                return $.trim(value)
+            },
+            rules:{
+                newname:{
+                    required:true
+                },
+            },
+            submitHandler: function(form){
+                var data = $('#editSubCategory').serialize();
+                console.log(data)
+                $.ajax({
+                    url:'/edit-sub',
+                    data: data,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == true){
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv2').html(
+                                `
+                                <div class="alert alert-success" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        } else {
+                            $('html, body').animate({ scrollTop: '0px' }, 500);
+                            $('.msgDiv2').html(
+                                `
+                                <div class="alert alert-danger" role="alert">
+                                    ${data.message}
+                                </div>
+                                `
+                            )
+                            setTimeout(function () {
+                                window.location.reload()
+                                }, 2000);
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+
+
+  </body>
+</html>
